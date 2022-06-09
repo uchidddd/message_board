@@ -19,3 +19,5 @@ public class DBUtil {
         return emf;
     }
 }
+
+// DAO SQLを実行するクラス

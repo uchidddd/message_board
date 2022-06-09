@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Timestamp;
+// データベースアクセスに関連するクラスなどを提供
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,25 +14,27 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "getAllMessages", query = "SELECT m FROM Message AS m ORDER BY m.id DESC")
+        @NamedQuery(
+                name = "getAllMessages",
+                query = "SELECT m FROM Message AS m ORDER BY m.id DESC")
 })
 @Table(name = "messages")
 public class Message {
     @Id
-    @Column(name = "id")
+    @Column(name = "id") // メッセージID
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title", length = 255, nullable = false)
+    @Column(name = "title", length = 255, nullable = false) // メッセージのタイトル
     private String title;
 
-    @Column(name = "content", length = 255, nullable = false)
+    @Column(name = "content", length = 255, nullable = false) // メッセージの内容
     private String content;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false) // 作成日時
     private Timestamp created_at;
 
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at", nullable = false) // 更新日時
     private Timestamp updated_at;
 
     public Integer getId() {
@@ -75,3 +78,5 @@ public class Message {
     }
 
 }
+
+// DTO：テーブルのデータの情報を覚えておくためのクラス
