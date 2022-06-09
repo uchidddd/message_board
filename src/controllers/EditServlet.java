@@ -30,7 +30,8 @@ public class EditServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
         // 該当のIDのメッセージ1件のみをデータベースから取得
@@ -42,8 +43,11 @@ public class EditServlet extends HttpServlet {
         request.setAttribute("message", m);
         request.setAttribute("_token", request.getSession().getId());
 
+        // メッセージデータが存在しているときのみ
         // メッセージIDをセッションスコープに登録
-        request.getSession().setAttribute("message_id", m.getId());
+        if(m != null) {
+            request.getSession().setAttribute("message_id", m.getId());
+        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/edit.jsp");
         rd.forward(request, response);
